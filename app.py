@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask import Flask, render_template
 
 app = Flask(__name__)
+CORS(app)
 
 # Chinese page
 @app.route('/ch')
