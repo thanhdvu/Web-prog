@@ -5,6 +5,10 @@ from flask import Flask, render_template
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def home():
+    return render_template('index_ch.html')
+
 # Chinese page
 @app.route('/ch')
 def index_ch():
