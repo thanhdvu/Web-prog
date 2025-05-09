@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Yonsei Lost & Found</title>
     <!-- Chrome, Safari, IE -->
-    <link rel="shortcut icon" href="/imges/기본형_심볼-01.jpg" type="image/jpg" />
-    <link rel="icon" href="/imges/기본형_심볼-01.jpg" type="image/jpg" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
+    <link
+      rel="shortcut icon"
+      href="static/images/기본형_심볼-01.jpg"
+      type="image/jpg"
+    />
+    <link rel="icon" href="static/images/기본형_심볼-01.jpg" type="image/jpg" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
 
-<body>
-        <header>
-            <div class="container">
-                <!-- Logo -->
-                <div class="logo">
-                    <img src="/imges/기본형_심볼-03-removebg-preview.png" alt="Yonsei" style="width: 225px; height: auto;">
-                </div>
-                
-                <!-- Langugages -->
-                <ul class="gnb_lang">
-                    <li><a href="/ko/index_ko.html" >한국어</a></li>
-                    <li><a href="/en/index_en.html" >ENGLISH</a></li>
-                    <li><a href="/ch/index_ch.html" >中文</a></li>
-                </ul>
-            </div>
+  <body>
+    <header>
+      <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+          <img
+            src="static/images/기본형_심볼-03-removebg-preview.png"
+            alt="Yonsei"
+            style="width: 225px; height: auto"
+          />
+        </div>
 
-                <!-- Title -->
-                <div class="title">
-                    <h2>송도 캠퍼스</h2>
-                    <h1> 연세대학교 유실물 통합포털 </h1>
-                </div>
+        <!-- Langugages -->
+        <ul class="gnb_lang">
+          <li><a href="/ko/index_ko.html">한국어</a></li>
+          <li><a href="/en/index_en.html">ENGLISH</a></li>
+          <li><a href="/ch/index_ch.html">中文</a></li>
+        </ul>
+      </div>
 
+      <!-- Title -->
+      <div class="title">
+        <h2>송도 캠퍼스</h2>
+        <h1>연세대학교 유실물 통합포털</h1>
+      </div>
 
-        <!-- Button -->
-            <div class="buttons-container">
-                <button id="button1">습득물 등록</button>
-                <button id="button2">습득물 검색</button>
-            </div>
-        </header>
+      <!-- Button -->
+      <div class="buttons-container">
+        <button id="button1">습득물 등록</button>
+        <button id="button2">습득물 검색</button>
+      </div>
+    </header>
 
-        <!-- Button href -->
-        <script>
-            var button1 = document.getElementById('button1');
-            var button2 = document.getElementById('button2');
+    <!-- Button href -->
+    <script>
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
 
-            button1.addEventListener('click', function() {
-                window.location.href = '/ko/register_ko.html'; 
-            });
-        
-            button2.addEventListener('click', function() {
-                window.location.href = '/ko/find_ko.html'; 
-            });
-        </script>
+      button1.addEventListener("click", function () {
+        window.location.href = "/ko/register_ko.html";
+      });
 
-</body>
-
+      button2.addEventListener("click", function () {
+        window.location.href = "/ko/find_ko.html";
+      });
+    </script>
+  </body>
 </html>

@@ -1,129 +1,128 @@
-*{
-    padding: 0%;
-    margin: auto;
-    font-family: 'Noto sans', sans-serif;
+* {
+  padding: 0%;
+  margin: auto;
+  font-family: "Noto sans", sans-serif;
 }
 
 header {
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../imges/KakaoTalk_Photo_2024-05-08-12-32-38.jpeg);
-    height: 100vh;
-    background-size: cover;
-    background-color: #000;
-    background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(static/images/main_page.jpeg);
+  height: 100vh;
+  background-size: cover;
+  background-color: #000;
+  background-position: center;
 }
 
-.container{
-    display: flex; 
-    border: 20%;
-    align-items: center; 
-    background-color: rgba(255, 255, 255, 0.8);; 
-    padding: 0px;
+.container {
+  display: flex;
+  border: 20%;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0px;
 }
-
 
 .findList {
-    width: 50%;
-    margin: 0 auto; 
-    display: flex;
-    justify-content: center; 
-    padding-top: 5%;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
 }
 
 .lost_qfind2 {
-    width: 80%; 
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    
+  width: 80%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
 }
 
-h1{
-    padding: 10px;
-    color: #000;
-    font-size: 20px;
-    font-weight: 100;
-    text-align: center;
+h1 {
+  padding: 10px;
+  color: #000;
+  font-size: 20px;
+  font-weight: 100;
+  text-align: center;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
-.list{
-    text-align: center;
-    margin: 0 auto; 
-    width: 80%; 
+.list {
+  text-align: center;
+  margin: 0 auto;
+  width: 80%;
 }
 
 input[type="text"],
 input[type="date"],
 select {
-    width: 80%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    text-align: center;
-    margin-top: 20px;
-    margin: 0 auto;
-    display: block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  margin: 0 auto;
+  display: block;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 button {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-.logo{
-    margin-right: auto;
-    margin-left: 20px;
+.logo {
+  margin-right: auto;
+  margin-left: 20px;
 }
 
 ul {
-    float: right;
-    list-style-type: none;
-    margin-top: middle;
-    padding: 0px;
-    margin-right: 20px;
+  float: right;
+  list-style-type: none;
+  margin-top: middle;
+  padding: 0px;
+  margin-right: 20px;
 }
 
 ul li {
-    display: inline-block;
-    margin-right: 10px;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 ul li a {
-    text-decoration: none;
-    color: #000;
-    padding: 5px 20px;
-    border: 1px solid #000;
-    transition: 0.1s ease; 
+  text-decoration: none;
+  color: #000;
+  padding: 5px 20px;
+  border: 1px solid #000;
+  transition: 0.1s ease;
 }
 
 ul li a:hover {
-    background-color: #4169E1;
-    color: #fff;
-    border: 1px solid #fff;
+  background-color: #4169e1;
+  color: #fff;
+  border: 1px solid #fff;
 }
