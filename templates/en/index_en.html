@@ -6,10 +6,10 @@
     <!-- Chrome, Safari, IE -->
     <link
       rel="shortcut icon"
-      href="/imges/기본형_심볼-01.jpg"
+      href="static/images/기본형_심볼-01.jpg"
       type="image/jpg"
     />
-    <link rel="icon" href="/imges/기본형_심볼-01.jpg" type="image/jpg" />
+    <link rel="icon" href="static/images/기본형_심볼-01.jpg" type="image/jpg" />
     <link rel="stylesheet" type="text/css" href="static/css/style.css" />
   </head>
 
@@ -28,9 +28,9 @@
           <h1>Yonsei Lost & found</h1>
         </div>
         <ul class="gnb_lang">
-          <li><a href="/templates/ko/find_ko.html">한국어</a></li>
-          <li><a href="/templates/en/index_en.html">ENGLISH</a></li>
-          <li><a href="/templates/ch/index_ch.html">中文</a></li>
+          <li><a href="{{ url_for('index_ko') }}">한국어</a></li>
+          <li><a href="{{ url_for('index_en') }}">ENGLISH</a></li>
+          <li><a href="{{ url_for('index_ch') }}">中文</a></li>
         </ul>
       </div>
 
@@ -38,20 +38,20 @@
         <button id="button1">Registration of found items</button>
         <button id="button2">Search for found items</button>
       </div>
-
-      <!-- Button href -->
-      <script>
-        var button1 = document.getElementById("button1");
-        var button2 = document.getElementById("button2");
-
-        button1.addEventListener("click", function () {
-          window.location.href = "/en/register_en.html";
-        });
-
-        button2.addEventListener("click", function () {
-          window.location.href = "/en/find_en.html";
-        });
-      </script>
     </header>
+
+    <!-- Button href -->
+    <script>
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+
+      button1.addEventListener("click", function () {
+        window.location.href = "{{ url_for('register_en') }}";
+      });
+
+      button2.addEventListener("click", function () {
+        window.location.href = "{{ url_for('find_en') }}";
+      });
+    </script>
   </body>
 </html>

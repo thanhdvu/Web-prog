@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Yonsei Lost & Found</title>
     <!-- Chrome, Safari, IE -->
-    <link rel="shortcut icon" href="static/images/기본형_심볼-01.jpg" type="image/jpg" />
+    <link
+      rel="shortcut icon"
+      href="static/images/기본형_심볼-01.jpg"
+      type="image/jpg"
+    />
     <link rel="icon" href="static/images/기본형_심볼-01.jpg" type="image/jpg" />
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+  </head>
 
 <body>
     <header>
@@ -20,9 +24,9 @@
         
         <!-- Langugages -->
         <ul class="gnb_lang">
-            <li><a href="/templates/ko/find_ko.html" >한국어</a></li>
-            <li><a href="/templates/en/index_en.html" >ENGLISH</a></li>
-            <li><a href="/templates/ch/index_ch.html" >中文</a></li>
+            <li><a href="{{ url_for('index_ko') }}">한국어</a></li>
+            <li><a href="{{ url_for('index_en') }}">ENGLISH</a></li>
+            <li><a href="{{ url_for('index_ch') }}">中文</a></li>
         </ul>
     </div>
 

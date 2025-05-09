@@ -27,9 +27,9 @@
 
         <!-- Langugages -->
         <ul class="gnb_lang">
-          <li><a href="/templates/ko/find_ko.html">한국어</a></li>
-          <li><a href="/templates/en/index_en.html">ENGLISH</a></li>
-          <li><a href="/templates/ch/index_ch.html">中文</a></li>
+          <li><a href="{{ url_for('index_ko') }}">한국어</a></li>
+          <li><a href="{{ url_for('index_en') }}">ENGLISH</a></li>
+          <li><a href="{{ url_for('index_ch') }}">中文</a></li>
         </ul>
       </div>
 
@@ -52,11 +52,11 @@
       var button2 = document.getElementById("button2");
 
       button1.addEventListener("click", function () {
-        window.location.href = "/ko/register_ko.html";
+        window.location.href = "{{ url_for('register_ko') }}";
       });
 
       button2.addEventListener("click", function () {
-        window.location.href = "/ko/find_ko.html";
+        window.location.href = "{{ url_for('find_ko') }}";
       });
     </script>
   </body>
