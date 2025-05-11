@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Noto sans", sans-serif;
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
 }
 
 link[rel="shortcut icon"] {
