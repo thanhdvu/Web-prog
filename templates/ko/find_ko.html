@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-    <head>
-        <meta charset="utf-8">
-        <title>Yonsei Lost & Found</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Yonsei Lost & Found</title>
     <!-- Chrome, Safari, IE -->
-    <link rel="shortcut icon" href="기본형_심볼-01.jpg" type="image/jpg" />
-    <link rel="icon" href="기본형_심볼-01.jpg" type="image/jpg" />
-
- <link rel="stylesheet" type="text/css" href="/css/style_find.css">
-    </head>
+    <link
+      rel="shortcut icon"
+      href="static/images/기본형_심볼-01.jpg"
+      type="image/jpg"
+    />
+    <link rel="icon" href="static/images/기본형_심볼-01.jpg" type="image/jpg" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_find.css') }}">
+  </head>
 
         <body>
             <header>
                 <div class="container">
                     <!-- Logo -->
                     <div class="logo">
-                        <img src="/imges/기본형_심볼-03-removebg-preview.png" alt="Yonsei" style="width: 225px; height: auto;">
+                    <img
+                        src="{{ url_for('static', filename='images/기본형_심볼-03-removebg-preview.png') }}"
+                        alt="Yonsei"
+                        style="width: 225px; height: auto"
+                    />
                     </div>
 
                     <!-- Langugages -->
                     <ul class="gnb_lang">
-                        <li><a href="/ko/index_ko.html" >한국어</a></li>
-                        <li><a href="/en/index_en.html" >ENGLISH</a></li>
-                        <li><a href="/ch/index_ch.html" >中文</a></li>
+                        <li><a href="{{ url_for('index_ko') }}">한국어</a></li>
+                        <li><a href="{{ url_for('index_en') }}">ENGLISH</a></li>
+                        <li><a href="{{ url_for('index_ch') }}">中文</a></li>
                     </ul>
                 </div>
                 
