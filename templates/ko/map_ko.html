@@ -58,7 +58,6 @@
     <div id="map"></div>
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=udhwj5en73"></script>
     <script>
-      document.addEventListener("DOMContentLoaded",function(){
         const buildingLocations = {
             "101": { name: "언더우드기념도서관", lat: 37.382499674654284, lng:126.67110064169147, image:"img/101.png" },
             "203": { name: "운동장", lat: 37.38505660284087, lng: 126.67039362700353, image:"img/203.png"},
@@ -73,7 +72,6 @@
             "502": { name: "진리관C", lat: 37.38183522818802, lng: 126.67031175217751, image:"img/502.png"},
             "503": { name: "진리관D", lat: 37.38114903557426, lng: 126.67142127822844, image:"img/503.png"},
         };
-      });
 
     const defaultCenter = new naver.maps.LatLng(37.3820, 126.6711394526905);
 
@@ -86,7 +84,7 @@
         map: map,
          position: defaultCenter,
     });
-      function updateMapByBuildingCode(code) {
+      window.updateMapByBuildingCode=function(code) {
         const mapDiv = document.getElementById("map");
         const infoDiv = document.getElementById("buildingInfo");
         const img = document.getElementById("buildingImage");
@@ -112,15 +110,6 @@
           mapDiv.classList.add("side");
         }
       }
-      const selector = document.getElementById("uBuilding");
-      if (selector) {
-        selector.addEventListener("change", function () {
-          updateMapByBuildingCode(this.value);
-        });
-      updateMapByBuildingCode(selector.value);
-    } else {
-      console.error("Cannot find #uBuilding dropdown");
-    };
     </script>
 </body>
 </html>
