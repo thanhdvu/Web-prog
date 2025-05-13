@@ -2,17 +2,22 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>연세 유실물 로그인</title>
+    <title>회원가입 - 연세 유실물 센터</title>
 </head>
 <body>
-    <h2>연세 유실물 센터 로그인</h2>
+    <h2>회원가입</h2>
 
-    <form action="/auth/login" method="POST">
-        <input type="text" name="email" required>
-        <input type="password" name="password" required>
-        <button type="submit">로그인</button>
+    <form action="/ko/signup" method="POST">
+        <label for="email">이메일:</label>
+        <input type="text" id="email" name="email" required><br><br>
+
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">회원가입</button>
     </form>
 
-    <p>아직 회원이 아니신가요? <a href="/ko/signup">회원가입</a></p>
+
+    <p>이미 회원이신가요? <a href="/ko/login">로그인</a></p>
 </body>
 </html>
