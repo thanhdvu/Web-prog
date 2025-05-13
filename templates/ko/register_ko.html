@@ -69,11 +69,26 @@
                         <option value="502">진리관C</option>
                         <option value="503">진리관D</option>
                     </select>
+                    <iframe id="mapFrame" src="map_ko.html" style="width:100%; height:500px; border:1px solid #ccc; margin-top:20px;"></iframe>
+
             </div>
             <input type="submit" value="Submit">
         </form>
         </div>
-        </div>
+      </div>
+        <script>
+          const mapFrame = document.getElementById("mapFrame");
+
+          mapFrame.onload = function () {
+          document.getElementById("uBuilding").addEventListener("change", function () {
+              const selectedCode = this.value;
+              if (mapFrame.contentWindow && typeof mapFrame.contentWindow.updateMapByBuildingCode === 'function') {
+              mapFrame.contentWindow.updateMapByBuildingCode(selectedCode);
+              }
+          });
+          };
+        </script>          
+      </body>
 </body>
 </header>
 </html>
