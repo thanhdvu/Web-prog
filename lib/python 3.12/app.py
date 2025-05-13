@@ -50,5 +50,14 @@ def find_ko():
 def register_ko():
     return render_template('ko/register_ko.html')
 
+@app.route('/ko/login')
+def login_ko():
+    return render_template('ko/login_ko.html')
+
+@app.route('/ko/signup')
+def signup_ko():
+    return render_template('ko/signup_ko.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
+
