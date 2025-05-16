@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ g.get('lang', 'ko') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{{ config.SITE_NAME }}{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    {% block head %}{% endblock %}
+  </head>
+
+  <body>
+    <!-- Header with Logo, Menu, Language Selector, Shortcuts -->
+    <header class="container">
+      <div class="logo">
+        <a href="{{ url_for('index_ko') }}">
+          <img
+            src="{{ url_for('static', filename='images/기본형_심볼-03-removebg-preview.png') }}"
+            alt="{{ config.SITE_NAME }} Logo"
+          />
+        </a>
+      </div>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
+          <li><a href="{{ url_for('products') }}">Products</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="language-selector">
+        <a href="{{ url_for('set_language', lang='ko') }}">한국어</a>
+        <a href="{{ url_for('set_language', lang='en') }}">English</a>
+        <a href="{{ url_for('set_language', lang='zh') }}">中文</a>
+      </div>
+
+      <div class="shortcuts">
+        <!-- Example shortcuts, adjust as needed -->
+        <a href="{{ url_for('search') }}" title="Search"
+          ><i class="icon-search"></i
+        ></a>
+        <a href="{{ url_for('cart') }}" title="Cart"
+          ><i class="icon-cart"></i
+        ></a>
+      </div>
+    </header>
+
+    <!-- Main content with background -->
+    <main
+      class="site-content"
+      style="background-image: url('{{ url_for('static', filename='images/main_page.jpeg') }}');"
+    >
+      {% block content %}
+      <!-- Page-specific content goes here -->
+      {% endblock %}
+    </main>
+
+    <!-- Optional footer block -->
+    <footer class="site-footer">
+      {% block footer %}
+      <p>
+        &copy; {{ current_year }} {{ config.SITE_NAME }}. All rights reserved.
+      </p>
+      {% endblock %}
+    </footer>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
