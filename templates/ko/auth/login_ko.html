@@ -5,23 +5,26 @@
     <title>Yonsei Lost & Found</title>
     <!-- Chrome, Safari, IE -->
     <link
-      rel="shortcut icon"
-      href="static/images/기본형_심볼-01_cut.png"
-      type="image/png"
-    />
-    <link
       rel="icon"
       href="static/images/기본형_심볼-01_cut.png"
       type="image/png"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+      <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
   </head>
 
   <body>
+      <header>
+      <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+          <img
+            src="/static/images/기본형_심볼-03-removebg-preview.png"
+            alt="Yonsei"
+            style="width: 225px; height: auto"
+          />
+        </div>
+      </header>
+
     <h2>연세 유실물 센터 로그인</h2>
 
     <form action="/auth/login" method="POST">

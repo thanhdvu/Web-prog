@@ -5,14 +5,20 @@
   font-family: "Noto Sans", sans-serif;
 }
 
-link[rel="shortcut icon"] {
+link[rel="icon"] {
   width: auto;
   height: auto;
 }
 
-link[rel="icon"] {
-  width: 32px;
-  height: 32px;
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.43), rgba(0, 0, 0, 0.43)),
+    url(/static/images/main_page.jpeg);
+  height: 100vh;
+  background-size: cover;
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
 .container {
@@ -20,15 +26,6 @@ link[rel="icon"] {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 0px;
-}
-
-header {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(/static/images/main_page.jpeg);
-  height: 100vh;
-  background-size: cover;
-  background-color: #000;
-  background-position: center;
 }
 
 .logo {
