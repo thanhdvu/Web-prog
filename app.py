@@ -58,6 +58,10 @@ def login_ko():
 def signup_ko():
     return render_template('ko/auth/signup_ko.html')
 
+@app.route('/ko/map')
+def map_ko():
+    return render_template('ko/map_ko.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
 
