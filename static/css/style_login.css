@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
+}
+
+link[rel="icon"] {
+  width: auto;
+  height: auto;
+}
+
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.43), rgba(0, 0, 0, 0.43)),
+    url(/static/images/main_page.jpeg);
+  background-size: cover;
+  background-color: #000;
+  background-position: auto;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0px;
+}
+
+.logo {
+  margin-right: auto;
+  margin-left: 20px;
+}
