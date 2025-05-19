@@ -5,11 +5,10 @@
     <title>Yonsei Lost & Found</title>
     <!-- Chrome, Safari, IE -->
     <link
-      rel="shortcut icon"
-      href="static/images/기본형_심볼-01.jpg"
-      type="image/jpg"
+      rel="icon"
+      href="static/images/기본형_심볼-01_cut.png"
+      type="image/png"
     />
-    <link rel="icon" href="static/images/기본형_심볼-01.jpg" type="image/jpg" />
     <link rel="stylesheet" type="text/css" href="static/css/style.css" />
   </head>
 
@@ -29,6 +28,7 @@
         <ul class="gnb_lang">
           <li><a href="{{ url_for('login_ko') }}">로그인</a></li>
           <li><a href="{{ url_for('signup_ko') }}">회원가입</a></li>
+          <li><a href="{{ url_for('map_ko')}}">지도</a></li>
           <li><a href="{{ url_for('index_ch') }}">언어</a></li>
         </ul>
       </div>

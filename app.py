@@ -52,13 +52,16 @@ def register_ko():
 
 @app.route('/ko/login')
 def login_ko():
-    return render_template('ko/login_ko.html')
+    return render_template('ko/auth/login_ko.html')
 
 @app.route('/ko/signup')
 def signup_ko():
-    return render_template('ko/signup_ko.html')
+    return render_template('ko/auth/signup_ko.html')
+
+@app.route('/ko/map')
+def map_ko():
+    return render_template('ko/map_ko.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
-#aaa
 

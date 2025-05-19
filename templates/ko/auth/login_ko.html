@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>Yonsei Lost & Found</title>
+    <!-- Chrome, Safari, IE -->
+    <link
+      rel="icon"
+      href="static/images/기본형_심볼-01_cut.png"
+      type="image/png"
+    />
+      <link rel="stylesheet" type="text/css" href="/static/css/style_login.css" />
+  </head>
+
+  <body>
+      <header>
+      <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+          <img
+            src="/static/images/기본형_심볼-03-removebg-preview.png"
+            alt="Yonsei"
+            style="width: 225px; height: auto"
+          />
+        </div>
+      </header>
+
+    <h2>연세 유실물 센터 로그인</h2>
+
+    <form action="/auth/login_ko" method="POST">
+      <input type="text" name="email" required />
+      <input type="password" name="password" required />
+      <button type="submit">로그인</button>
+    </form>
+
+    <p>아직 회원이 아니신가요? <a href="/ko/signup">회원가입</a></p>
+  </body>
+</html>
