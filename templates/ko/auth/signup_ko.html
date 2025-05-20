@@ -9,26 +9,54 @@
       href="static/images/기본형_심볼-01_cut.png"
       type="image/png"
     />
+      <link rel="stylesheet" type="text/css" href="/static/css/style_auth.css" />
   </head>
 
   <body>
-    <h2>회원가입</h2>
+          <header>
+      <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+      <a href="{{ url_for('index_ko') }}">
+          <img
+            src="/static/images/기본형_심볼-03-removebg-preview.png"
+            alt="Yonsei"
+            style="width: 235px; height: auto"
+          />
+        </a>
+      </div>
 
-    <form action="/ko/signup_ko" method="POST">
-      <label for="email">이메일:</label>
-      <input type="text" id="email" name="email" required /><br /><br />
+          <ul>
+      <li><a href="{{ url_for('login_ko') }}">로그인</a></li>
+      <li><a href="{{ url_for('signup_ko') }}">회원가입</a></li>
+      <li><a href="{{ url_for('map_ko')}}">지도</a></li>
+      <li>
+        <a href="#" class="has-dropdown">Languages</a>
+        <div class="language-dropdown">
+          <a href="{{ url_for('index_ko') }}">한국어</a>
+          <a href="{{ url_for('index_en') }}">English</a>
+          <a href="{{ url_for('index_ch') }}">中文</a>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-      <label for="password">비밀번호:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-      /><br /><br />
+      </header>
 
-      <button type="submit">회원가입</button>
-    </form>
+ <div class="login-wrapper">
+    <div class="login-card">
+      <h2>회원가입</h2>
+      <form action="/ko/signup_ko" method="POST">
+        <label for="email">이메일</label>
+        <input id="email" name="email" type="email" required />
 
-    <p>이미 회원이신가요? <a href="/ko/login">로그인</a></p>
+        <label for="password">비밀번호</label>
+        <input id="password" name="password" type="password" required />
+
+        <button type="submit">회원가입</button>
+      </form>
+      <p>이미 회원이신가요? <a href="/ko/login">로그인</a></p>
+    </div>
+
   </body>
 </html>
