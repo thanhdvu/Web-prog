@@ -116,8 +116,8 @@ ul li a.active {
 
 .title,
 .buttons-container {
-  width: 100%; /* 让标题和按钮容器占满父容器宽度，便于整体布局 */
-  text-align: center; /* 文本内容水平居中 */
+  width: 100%;
+  text-align: center;
 }
 
 .title {

@@ -13,11 +13,10 @@ link[rel="icon"] {
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.43), rgba(0, 0, 0, 0.43)),
     url(/static/images/main_page.jpeg);
-  background-size: cover;
-  background-color: #000;
-  background-position: auto;
   background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .container {
@@ -118,7 +117,7 @@ ul li a.active {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90vh;
+  height: 85vh;
 }
 .login-card {
   background: rgba(255, 255, 255, 0.9);
