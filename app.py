@@ -1,6 +1,9 @@
 from flask import Flask, render_template
 from flask_cors import CORS
 from auth import auth_bp
+from flask import Flask
+
+app = Flask(__name__, static_folder='static')
 
 app = Flask(__name__)
 CORS(app)
