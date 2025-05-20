@@ -11,7 +11,7 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@auth.route('/signup', methods=['GET', 'POST'])
+@auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         username = request.form['username']
@@ -36,7 +36,7 @@ def signup():
     
     return render_template('signup_ko.html')
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -58,7 +58,7 @@ def login():
     
     return render_template('login_ko.html')
 
-@auth.route('/logout')
+@auth_bp.route('/logout')
 def logout():
     session.clear()
     flash('Đăng xuất thành công!')
