@@ -1,3 +1,6 @@
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "vendor"))
+
 from flask import Flask, render_template
 from flask_cors import CORS
 from auth import auth_bp
