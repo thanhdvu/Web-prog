@@ -17,22 +17,45 @@
       <div class="container">
         <!-- Logo -->
         <div class="logo">
+      <a href="{{ url_for('index_ko') }}">
           <img
             src="/static/images/기본형_심볼-03-removebg-preview.png"
             alt="Yonsei"
-            style="width: 225px; height: auto"
+            style="width: 235px; height: auto"
           />
+        </a>
+      </div>
+
+          <ul>
+      <li><a href="{{ url_for('login_ko') }}">로그인</a></li>
+      <li><a href="{{ url_for('signup_ko') }}">회원가입</a></li>
+      <li><a href="{{ url_for('map_ko')}}">지도</a></li>
+      <li>
+        <a href="#" class="has-dropdown">Languages</a>
+        <div class="language-dropdown">
+          <a href="{{ url_for('index_ko') }}">한국어</a>
+          <a href="{{ url_for('index_en') }}">English</a>
+          <a href="{{ url_for('index_ch') }}">中文</a>
         </div>
+      </li>
+    </ul>
+  </div>
+
       </header>
 
-    <h2>연세 유실물 센터 로그인</h2>
+<div class="login-wrapper">
+    <div class="login-card">
+      <h2>연세 유실물 센터 로그인</h2>
+      <form action="/auth/login_ko" method="POST">
+        <label for="email">이메일</label>
+        <input id="email" name="email" type="text" required />
 
-    <form action="/auth/login_ko" method="POST">
-      <input type="text" name="email" required />
-      <input type="password" name="password" required />
-      <button type="submit">로그인</button>
-    </form>
+        <label for="password">비밀번호</label>
+        <input id="password" name="password" type="password" required />
 
-    <p>아직 회원이 아니신가요? <a href="/ko/signup">회원가입</a></p>
+        <button type="submit">로그인</button>
+      </form>
+      <p>아직 회원이 아니신가요? <a href="/ko/signup">회원가입</a></p>
+    </div>
   </body>
 </html>
