@@ -83,8 +83,9 @@
     const marker = new naver.maps.Marker({
         map: map,
          position: defaultCenter,
+         visible: false
     });
-      window.updateMapByBuildingCode=function(code) {
+    function updateMapByBuildingCode(code) {
         const mapDiv = document.getElementById("map");
         const infoDiv = document.getElementById("buildingInfo");
         const img = document.getElementById("buildingImage");
@@ -110,6 +111,7 @@
           mapDiv.classList.add("side");
         }
       }
+      updateMapByBuildingCode("ALL");
     </script>
 </body>
 </html>
