@@ -36,7 +36,7 @@ def signup():
 
         return redirect(url_for('auth_bp.login'))
 
-    return render_template('signup_ko.html')
+    return render_template('ko/signup_ko.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -58,7 +58,7 @@ def login():
             flash('이메일 또는 비밀번호가 올바르지 않습니다.')
             return redirect(url_for('auth.login'))
     
-    return render_template('login_ko.html')
+    return render_template('ko/login_ko.html')
 
 @auth_bp.route('/logout')
 def logout():
