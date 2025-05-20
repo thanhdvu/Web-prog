@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
-auth = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth_bp', __name__)
 
 DB_PATH = 'users.db'
 
