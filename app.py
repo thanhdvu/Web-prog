@@ -4,11 +4,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "vendor"))
 from flask import Flask, render_template
 from flask_cors import CORS
 from auth import auth_bp
-from flask import Flask
 
 app = Flask(__name__, static_folder='static')
-
-app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
