@@ -14,26 +14,25 @@ def get_db_connection():
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         hashed_pw = generate_password_hash(password)
 
-        conn = get_db_connection()
+        conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
         try:
-            cursor.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-                           (username, email, hashed_pw))
+            cursor.execute(
+                'INSERT INTO users (email, password) VALUES (?, ?)',
+                (email, hashed_pw)
+            )
             conn.commit()
         except sqlite3.IntegrityError:
-            flash('Username hoặc email đã tồn tại!')
-            return redirect(url_for('auth.signup'))
+            flash('이미 존재하는 이메일입니다.')
         finally:
             conn.close()
 
-        flash('Đăng ký thành công!')
-        return redirect(url_for('auth.login'))
-    
+        return redirect(url_for('auth_bp.login'))
+
     return render_template('signup_ko.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -50,10 +49,10 @@ def login():
 
         if user and check_password_hash(user['password'], password):
             session['user_id'] = user['id']
-            flash('Đăng nhập thành công!')
-            return redirect(url_for('main.profile'))  # hoặc route khác tùy bạn
+            flash('로그인에 성공했습니다!')
+            return redirect(url_for('main.profile'))  
         else:
-            flash('Email hoặc mật khẩu không đúng!')
+            flash('이메일 또는 비밀번호가 올바르지 않습니다.')
             return redirect(url_for('auth.login'))
     
     return render_template('login_ko.html')
@@ -61,5 +60,5 @@ def login():
 @auth_bp.route('/logout')
 def logout():
     session.clear()
-    flash('Đăng xuất thành công!')
+    flash('로그아웃되었습니다.')
     return redirect(url_for('auth.login'))
