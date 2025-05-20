@@ -6,6 +6,7 @@ from flask_cors import CORS
 from auth import auth_bp
 
 app = Flask(__name__, static_folder='static')
+app.secret_key = 'yonsei_uni_140'
 CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix='/auth')

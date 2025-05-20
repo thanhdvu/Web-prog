@@ -4,8 +4,10 @@ import sqlite3
 conn = sqlite3.connect('users.db')
 cursor = conn.cursor()
 
+cursor.execute("DROP TABLE IF EXISTS users")
+
 cursor.execute('''
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
@@ -14,4 +16,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 conn.commit()
 conn.close()
+
+
+
+
+
 

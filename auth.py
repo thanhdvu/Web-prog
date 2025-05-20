@@ -31,12 +31,14 @@ def signup():
             conn.commit()
         except sqlite3.IntegrityError:
             flash('이미 존재하는 이메일입니다.')
+            return redirect(url_for('auth_bp.signup'))
         finally:
             conn.close()
 
+        flash('회원가입에 성공했습니다!')
         return redirect(url_for('auth_bp.login'))
 
-    return render_template('ko/signup_ko.html')
+    return render_template('ko/auth/signup_ko.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -53,12 +55,12 @@ def login():
         if user and check_password_hash(user['password'], password):
             session['user_id'] = user['id']
             flash('로그인에 성공했습니다!')
-            return redirect(url_for('main.profile'))  
+            return redirect(url_for('register_ko'))  
         else:
             flash('이메일 또는 비밀번호가 올바르지 않습니다.')
             return redirect(url_for('auth.login'))
     
-    return render_template('ko/login_ko.html')
+    return render_template('ko/auth/login_ko.html')
 
 @auth_bp.route('/logout')
 def logout():
