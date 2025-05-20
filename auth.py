@@ -1,11 +1,3 @@
-from flask import Blueprint, request, jsonify, redirect
-from werkzeug.security import generate_password_hash, check_password_hash
-from db import users_table
-import jwt, datetime
-import traceback
-
-auth_bp = Blueprint('auth', __name__)
-SECRET_KEY = 'yonseiuni'
 
 from flask import Blueprint, request, jsonify, redirect, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
