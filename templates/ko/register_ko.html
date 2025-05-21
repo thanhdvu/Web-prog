@@ -44,7 +44,7 @@
     <div class="lost_qfind2">
         <h2>습득물을 등록해보세요!</h2>
     </br>
-            <form method="POST" action="/register_item" enctype="multipart/form-data">
+            <form method="POST" action="{{ url_for('auth_bp.register_item') }}" enctype="multipart/form-data">
             <div class="list">
                 <!-- 습득물 종류 입력 -->
                 <label for="PRDT_CL_NM">분류명(내용):</label><br>

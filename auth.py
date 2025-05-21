@@ -2,10 +2,15 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 import sqlite3
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 auth_bp = Blueprint('auth_bp', __name__)
 
 DB_PATH = 'users.db'
+DB_PATH = 'instance/yonsei.db'
+
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def get_db_connection():
     db_path = os.path.join(os.path.dirname(__file__), 'users.db')
@@ -67,3 +72,33 @@ def logout():
     session.clear()
     flash('로그아웃되었습니다.')
     return redirect(url_for('auth.login'))
+
+@auth_bp.route('/register_item', methods=['POST'])
+def register_item():
+    prdt_cl_nm = request.form.get('PRDT_CL_NM')
+    start_ymd = request.form.get('START_YMD')
+    prdt_nm = request.form.get('PRDT_NM')
+    ubuilding = request.form.get('uBuilding')
+    description = request.form.get('description')
+    image = request.files.get('itemImage')
+
+    # Lưu ảnh
+    image_path = None
+    if image and image.filename != '':
+        filename = secure_filename(image.filename)
+        image_path = os.path.join(UPLOAD_FOLDER, filename)
+        image.save(image_path)
+
+    # Lưu vào DB yonsei.db
+    db_path = os.path.join(os.path.dirname(__file__), '..', 'instance', 'yonsei.db')
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO found_items (prdt_cl_nm, start_ymd, prdt_nm, ubuilding, description, image_path)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (prdt_cl_nm, start_ymd, prdt_nm, ubuilding, description, image_path))
+    conn.commit()
+    conn.close()
+
+    flash("습득물이 성공적으로 등록되었습니다.")
+    return redirect(url_for('register_ko'))
