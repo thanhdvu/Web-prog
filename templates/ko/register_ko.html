@@ -44,7 +44,7 @@
     <div class="lost_qfind2">
         <h2>습득물을 등록해보세요!</h2>
     </br>
-
+            <form method="POST" action="/register_item" enctype="multipart/form-data">
             <div class="list">
                 <!-- 습득물 종류 입력 -->
                 <label for="PRDT_CL_NM">분류명(내용):</label><br>
@@ -75,6 +75,14 @@
                         <option value="503">진리관D</option>
                     </select>
                     <iframe id="mapFrame" src="map_ko.html" style="width:100%; height:500px; border:1px solid #ccc; margin-top:20px;"></iframe>
+
+                    <!-- 이미지 업로드 -->
+                    <label for="itemImage">사진 업로드:</label><br>
+                    <input type="file" id="itemImage" name="itemImage" accept="image/*"><br><br>
+
+                    <!-- 추가 설명 -->
+                    <label for="description">상세 설명:</label><br>
+                    <textarea id="description" name="description" rows="4" cols="50" placeholder="습득물에 대한 추가 설명을 입력해주세요."></textarea><br><br>
 
             </div>
             <input type="submit" value="Submit">
