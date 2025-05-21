@@ -44,71 +44,7 @@
     <div class="lost_qfind2">
         <h2>습득물을 등록해보세요!</h2>
     </br>
-            <form method="POST" enctype="multipart/form-data" action="{{ url_for('register_item') }}">
-              <div class="list">
-                <!-- 분류명 -->
-                <label for="PRDT_CL_NM">분류명(내용):</label><br>
-                <input type="text" id="PRDT_CL_NM" name="PRDT_CL_NM"><br><br>
-
-                <!-- 날짜입력 -->
-                <label for="START_YMD">습득기간:</label><br>
-                <input type="date" id="START_YMD" name="START_YMD"><br><br>
-
-                <!-- 습득물명 -->
-                <label for="PRDT_NM">습득물명:</label><br>
-                <input type="text" id="PRDT_NM" name="PRDT_NM"><br><br>
-
-                <!-- 건물선택 -->
-                <label for="uBuilding">습득한 건물선택:</label><br>
-                <select name="uBuilding" id="uBuilding">
-                  <option value="ALL" selected>전체</option>
-                  <option value="102">Y-플라자</option>
-                  <option value="101">언더우드기념도서관</option>
-      
-                </select><br><br>
-
-                <label for="itemImage">사진 업로드 (선택):</label><br>
-                <input type="file" id="itemImage" name="itemImage" accept="image/*"><br><br>
-              </div>
-
-              <input type="submit" value="Submit">
-            </form>
-            <div class="list">
-                <!-- 습득물 종류 입력 -->
-                <label for="PRDT_CL_NM">분류명(내용):</label><br>
-                <input type="text" id="PRDT_CL_NM" name="PRDT_CL_NM"><br><br>
-
-                <!-- 날짜입력 -->
-                <label for="START_YMD">습득기간:</label><br>
-                <input type="date" id="START_YMD" name="START_YMD"><br><br>
-
-                <!-- 습득물명 입력 -->
-                <label for="PRDT_NM">습득물명:</label><br>
-                <input type="text" id="PRDT_NM" name="PRDT_NM"><br><br>
-
-                    <!-- 건물 선택  -->
-                    <label for="DEP_PLACE">습득한 건물선택:</label><br>
-                    <select name="uBuilding" id="uBuilding">
-                        <option value="ALL" selected>전체</option>
-                        <option value="102">Y-플라자</option>
-                        <option value="101">언더우드기념도서관</option>
-                        <option value="203">운동장</option>
-                        <option value="302">자유관A</option>
-                        <option value="301">자유관B</option>
-                        <option value="510">저에너지친환경실험주택</option>
-                        <option value="501">종합관</option>
-                        <option value="401">진리관A</option>
-                        <option value="402">진리관B</option>
-                        <option value="502">진리관C</option>
-                        <option value="503">진리관D</option>
-                    </select>
-                    <iframe id="mapFrame" src="map_ko.html" style="width:100%; height:500px; border:1px solid #ccc; margin-top:20px;"></iframe>
-
-            </div>
-            <input type="submit" value="Submit">
-        </form>
-        </div>
-      </div>
+    </div>
         <script>
           const mapFrame = document.getElementById("mapFrame");
 
