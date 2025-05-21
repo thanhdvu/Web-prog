@@ -54,7 +54,7 @@ def find_ko():
 
 @app.route('/ko/register')
 def register_ko():
-    return render_template('register_ko.html')
+    return render_template('ko/register_ko.html')
 
 @app.route('/ko/login')
 def login_ko():
