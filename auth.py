@@ -82,15 +82,15 @@ def register_item():
     description = request.form.get('description')
     image = request.files.get('itemImage')
 
-    # Lưu ảnh
     image_path = None
     if image and image.filename != '':
         filename = secure_filename(image.filename)
         image_path = os.path.join(UPLOAD_FOLDER, filename)
         image.save(image_path)
 
-    # Lưu vào DB yonsei.db
-    db_path = os.path.join(os.path.dirname(__file__), '..', 'instance', 'yonsei.db')
+    db_path = os.path.abspath('instance/yonsei.db')
+    print("💡 DB path used:", db_path)
+ 
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("""
@@ -101,4 +101,4 @@ def register_item():
     conn.close()
 
     flash("습득물이 성공적으로 등록되었습니다.")
-    return redirect(url_for('register_ko'))
+    return redirect(url_for('index_ko'))
