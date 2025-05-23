@@ -17,19 +17,6 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 def home():
     return render_template('ko/index_ko.html')
 
-# Chinese page
-@app.route('/ch')
-def index_ch():
-    return render_template('ch/index_ch.html')
-
-@app.route('/ch/find')
-def find_ch():
-    return render_template('ch/find_ch.html')
-
-@app.route('/ch/register')
-def register_ch():
-    return render_template('ch/register_ch.html')
-
 # English page
 @app.route('/en')
 def index_en():
