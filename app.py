@@ -6,17 +6,20 @@ from flask_login import login_required, current_user, LoginManager
 from flask_cors import CORS
 from auth import auth_bp
 from dotenv import load_dotenv
-import requests
 
 load_dotenv()
 NAVER_CLIENT_ID=os.getenv("udhwj5en73")
 NAVER_CLIENT_SECRET=os.getenv("gL2gWzBkk0bOSN8TnYdpbMRNDFVXPnDP5wdixzgM")
+from werkzeug.utils import secure_filename
+from flask import session
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = 'yonsei_uni_140'
 CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
+
+
 
 @app.route('/')
 def home():
@@ -46,11 +49,27 @@ def find_ko():
 
 @app.route('/ko/register')
 def register_ko():
+    if 'user' not in session:
+        return redirect(url_for('login_ko'))
     return render_template('ko/register_ko.html')
 
-@app.route('/ko/login')
+@app.route('/ko/login_ko', methods=['GET','POST'])
 def login_ko():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = db.users.find_one({'email': email, 'password': password})
+        if user:
+            session['user'] = email  
+            return redirect(url_for('register_ko'))
+        else:
+            return '로그인실패'
     return render_template('ko/auth/login_ko.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('login_ko'))
 
 @app.route('/ko/signup')
 def signup_ko():

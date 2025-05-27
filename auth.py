@@ -63,7 +63,7 @@ def login():
             return redirect(url_for('register_ko'))  
         else:
             flash('이메일 또는 비밀번호가 올바르지 않습니다.')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth_bp.login'))
     
     return render_template('ko/auth/login_ko.html')
 
@@ -71,7 +71,7 @@ def login():
 def logout():
     session.clear()
     flash('로그아웃되었습니다.')
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('auth_bp.login'))
 
 @auth_bp.route('/register_item', methods=['POST'])
 def register_item():
