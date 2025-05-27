@@ -1,7 +1,8 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "vendor"))
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash  
+from flask_login import login_required, current_user, LoginManager
 from flask_cors import CORS
 from auth import auth_bp
 from dotenv import load_dotenv
@@ -12,6 +13,7 @@ NAVER_CLIENT_ID=os.getenv("udhwj5en73")
 NAVER_CLIENT_SECRET=os.getenv("gL2gWzBkk0bOSN8TnYdpbMRNDFVXPnDP5wdixzgM")
 
 app = Flask(__name__, static_folder='static')
+app.secret_key = 'yonsei_uni_140'
 CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
@@ -19,19 +21,6 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 @app.route('/')
 def home():
     return render_template('ko/index_ko.html')
-
-# Chinese page
-@app.route('/ch')
-def index_ch():
-    return render_template('ch/index_ch.html')
-
-@app.route('/ch/find')
-def find_ch():
-    return render_template('ch/find_ch.html')
-
-@app.route('/ch/register')
-def register_ch():
-    return render_template('ch/register_ch.html')
 
 # English page
 @app.route('/en')

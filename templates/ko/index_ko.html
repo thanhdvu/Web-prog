@@ -13,6 +13,13 @@
     <link rel="stylesheet" type="text/css" href="static/css/style.css" />
   </head>
 
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for msg in
+  messages %} {% if msg != "로그인에 성공했습니다!" %}
+  <script>
+    alert("{{ msg }}");
+  </script>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+
   <body>
     <header>
       <div class="container">
@@ -37,7 +44,6 @@
             <div class="language-dropdown">
               <a href="{{ url_for('index_ko') }}">한국어</a>
               <a href="{{ url_for('index_en') }}">English</a>
-              <a href="{{ url_for('index_ch') }}">中文</a>
             </div>
           </li>
         </ul>
