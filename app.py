@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, sqlite3
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "vendor"))
 
 from flask import Flask, render_template, request, redirect, url_for, flash  
@@ -49,9 +49,19 @@ def find_ko():
 
 @app.route('/ko/register')
 def register_ko():
-    if 'user' not in session:
-        return redirect(url_for('login_ko'))
-    return render_template('ko/register_ko.html')
+    user_email = None
+
+    if 'user_id' in session:
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT email FROM users WHERE id = ?', (session['user_id'],))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            user_email = user[0]
+
+    return render_template('ko/register_ko.html', user_email=user_email)
 
 @app.route('/ko/login_ko', methods=['GET','POST'])
 def login_ko():

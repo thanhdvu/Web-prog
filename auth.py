@@ -43,7 +43,7 @@ def signup():
         flash('회원가입에 성공했습니다!')
         return redirect(url_for('auth_bp.login'))
 
-    return render_template('ko/auth/signup_ko.html')
+    return render_template('ko/auth/login_ko.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():

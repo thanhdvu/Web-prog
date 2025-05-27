@@ -45,7 +45,8 @@
     <div class="login-wrapper">
       <div class="login-card">
         <h2>로그인</h2>
-        <form action="/auth/login" method="POST">
+
+        <form method="POST" action="{{ url_for('auth_bp.login') }}">
           <label for="email">이메일</label>
           <input id="email" name="email" type="text" required />
 
