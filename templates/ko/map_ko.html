@@ -1,117 +1,149 @@
+
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+    <html lang="ko">
+    <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=udhwj5en73"></script>
     <title>연세대학교 국제캠퍼스 지도</title>
     <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        #container{
-          display:flex;
-          height:100vh;
-          width:100%;
-        }
-        #buildingInfo{
-          position: relative;
-          width:25%;
-          padding-top:220px;
-          box-sizing: border-box;
-          overflow-y:auto;
-        }
-        #map {
-          width: 100%;
-          height: 100vh;
-          transition: width 0.3s ease;
-        }
-        #map.side{
-          width:75%;
-        }
-        #buidingImage{
-          position: absolute;
-          top:0;
-          left:0;
-          height: 200px;
-          object-fit: cover;
-        }
-        #controls {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          z-index: 999;
-          background: white;
-          padding: 10px;
-          border-radius: 5px;
-        }
-      </style>
-</head>
-<body>
-    <div id="container">
-      <div id="buildingInfo">
-        <img id="buildingImage" src="" alt="Building" />
-        <h2 id="buildingName"></h2>
-      </div>
-    <div id="map"></div>
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=udhwj5en73"></script>
-    <script>
-        const buildingLocations = {
-            "101": { name: "언더우드기념도서관", lat: 37.382499674654284, lng:126.67110064169147, image:"/static/images/map_mg/101.png" },
-            "203": { name: "운동장", lat: 37.38505660284087, lng: 126.67039362700353, image:"img/203.png"},
-            "305":{name:"송도1학사", lat:37.38186484004004, lng:126.66721220250625, image:"img/305.png"},
-            "405":{name:"송도2학사", lat:37.38332087037019, lng:126.67236874521204, image:"img/405.png"},
-            "302": { name: "자유관A", lat: 37.382683576045125, lng: 126.6691958479459, image:"img/302.png"},
-            "301": { name: "자유관B", lat:  37.3834643374717, lng: 126.66808021643931, image:"img/301.png"},
-            "510": { name: "저에너지친환경실험주택", lat: 37.38005045818827, lng: 126.6700429389237, image:"img/510.png"},
-            "501": { name: "종합관", lat: 37.382286855360775, lng: 126.66990470276706, image:"img/501.png"},
-            "401": { name: "진리관A", lat: 37.38334132885237, lng: 126.67081326999616, image:"img/401.png"},
-            "402": { name: "진리관B", lat: 37.382962779406405, lng: 126.67157991126135, image:"img/402.png" },
-            "502": { name: "진리관C", lat: 37.38183522818802, lng: 126.67031175217751, image:"img/502.png"},
-            "503": { name: "진리관D", lat: 37.38114903557426, lng: 126.67142127822844, image:"img/503.png"},
-        };
-
-    const defaultCenter = new naver.maps.LatLng(37.3820, 126.6711394526905);
-
-    const map = new naver.maps.Map('map', {
-        center: defaultCenter,
-        zoom: 17
-    });
-
-    const marker = new naver.maps.Marker({
-        map: map,
-         position: defaultCenter,
-         visible: false
-    });
-    function updateMapByBuildingCode(code) {
-        const mapDiv = document.getElementById("map");
-        const infoDiv = document.getElementById("buildingInfo");
-        const img = document.getElementById("buildingImage");
-        const nameEl = document.getElementById("buildingName");
-
-        if (code === "ALL") {
-            mapDiv.classList.remove("side");
-            infoDiv.style.display = "none";
-            map.setCenter(defaultCenter);
-            marker.setPosition(defaultCenter);
-            return;
-          }
-
-        const building = buildingLocations[code];
-        if (building) {
-          const position = new naver.maps.LatLng(building.lat, building.lng);
-          map.setCenter(position);
-          marker.setPosition(position);
-
-          nameEl.textContent = building.name;
-          img.src = building.image || "";
-          infoDiv.style.display = "block";
-          mapDiv.classList.add("side");
-        }
+      html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
       }
-      updateMapByBuildingCode("ALL");
+      #container {
+      display: flex;
+      height: 100%;
+      }
+      #infoPanel {
+      width: 25%;
+      background: #f7f7f7;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      transition: all 0.3s ease;
+      display: none; /* Initially hidden */
+      }
+      #infoPanel h3 {
+      margin-top: 0;
+      }
+      #map {
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease;
+      }
+      #map.with-panel {
+      width: 75%;
+      }
+      .building-img{
+      width: 100%;
+      max-width: 200px;
+      margin-top:10px;
+      border-radius:6px;
+      }
+      #instruction {
+      color: #555;
+      font-size: 14px;
+      opacity: 0.8;
+      }
+      #buildingDetails{
+      color:#888;
+      font-size: 15px;
+      }
+  </style>
+  </head>
+  <body>
+      <div id="container">
+      <div id="infoPanel">
+      <h3>건물 정보</h3>
+      <div id="buildingDetails">마커를 클릭하면 정보가 표시됩니다.</div>
+      </div>
+      <div id="map"></div>
+      </div>
+      <script>
+          const buildingData = {
+            "101": { 
+              name: "언더우드기념도서관", 
+              coords: [37.382499674654284, 126.67110064169147], info: "연세대학교 국제캠퍼스의 중앙 도서관입니다.",
+              img: "static/map_img/101.png",
+
+            },
+            "203": { name: "운동장", coords: [37.38505660284087, 126.67039362700353], info: "각종 체육 활동과 행사가 열리는 운동장입니다." },
+            "305": { name: "송도1학사", coords: [37.38186484004004,126.66721220250625], info: "학생들을 위한 기숙사 건물입니다." },
+            "405": { name: "송도2학사", coords: [37.38332087037019,126.67236874521204], info: "학생들을 위한 기숙사 건물입니다." },
+            "302": { name: "자유관A", coords: [37.382683576045125, 126.6691958479459], info: "강의실과 사무실이 있는 학술 건물입니다." },
+            "301": { name: "자유관B", coords: [37.3834643374717, 126.66808021643931], info: "강의실과 사무실이 있는 학술 건물입니다." },
+            "510": { name: "저에너지친환경실험주택", coords: [37.38005045818827, 126.6700429389237], info: "친환경 기술을 연구하는 실험 주택입니다." },
+            "501": { name: "종합관", coords: [37.382286855360775, 126.66990470276706], info: "다양한 시설이 집약된 종합 건물입니다." },
+            "401": { name: "진리관A", coords: [37.38334132885237, 126.67081326999616], info: "강의실과 연구실이 있는 학술 건물입니다." },
+            "402": { name: "진리관B", coords: [37.382962779406405, 126.67157991126135], info: "강의실과 연구실이 있는 학술 건물입니다." },
+            "502": { name: "진리관C", coords: [37.38183522818802, 126.67031175217751], info: "강의실과 연구실이 있는 학술 건물입니다." },
+            "503": { name: "진리관D", coords: [37.38114903557426, 126.67142127822844], info: "강의실과 연구실이 있는 학술 건물입니다." },
+          };
+            
+            const map = new naver.maps.Map('map', {
+              center: new naver.maps.LatLng(37.3820, 126.6711),
+              zoom: 17
+            });
+
+            const infoPanel = document.getElementById('infoPanel');
+            const buildingDetails = document.getElementById('buildingDetails');
+            const mapDiv = document.getElementById('map');
+
+            for (const code in buildingData) {
+              const { name, coords, info } = buildingData[code];
+              const position = new naver.maps.LatLng(coords[0], coords[1]);
+
+            const marker = new naver.maps.Marker({
+                position: position,
+                map,
+                title: name,
+                icon: {
+                  content:'<img src="/static/images/marker.png" style="width:50px; height:52px;">',
+                  size: new naver.maps.Size(50, 52),
+                  anchor: new naver.maps.Point(25, 52)
+                },
+               
+              });
+
+              // Label marker
+              const markerLabel = new naver.maps.Marker({
+                position: position,
+                map: map,
+                icon: {
+                  content: `<div style="
+                    color: #053676;
+                    background-color: white;
+                    padding: 4px 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    font-weight: bold;
+                    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+                    text-align: center;
+                    white-space: nowrap;
+                    transform:translateX(-50%);
+                    ">
+                    ${name}
+                  </div>`
+                },
+                anchor: new naver.maps.Point(25, 58),
+                clickable: false
+              });
+             
+
+            naver.maps.Event.addListener(marker, 'click', () => {
+            buildingDetails.innerHTML = `<h4>${name}</h4><p>${info}</p>`;
+            buildingDetails.style.color = "#000";
+
+      // Show info panel and adjust map width
+      infoPanel.style.display = 'block';
+      mapDiv.classList.add('with-panel');
+      });
+    }
     </script>
-</body>
-</html>
+    </body>
+   </html>

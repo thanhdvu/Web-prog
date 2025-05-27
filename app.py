@@ -4,6 +4,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "vendor"))
 from flask import Flask, render_template
 from flask_cors import CORS
 from auth import auth_bp
+from dotenv import load_dotenv
+import requests
+
+load_dotenv()
+NAVER_CLIENT_ID=os.getenv("udhwj5en73")
+NAVER_CLIENT_SECRET=os.getenv("gL2gWzBkk0bOSN8TnYdpbMRNDFVXPnDP5wdixzgM")
 
 app = Flask(__name__, static_folder='static')
 CORS(app)
