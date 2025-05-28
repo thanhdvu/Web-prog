@@ -19,7 +19,7 @@ CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
 
-
+db = sqlite3.connect('users.db')
 
 @app.route('/')
 def home():
