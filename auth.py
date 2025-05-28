@@ -22,6 +22,7 @@ def get_db_connection():
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        user_id = request.form['user_id']
         email = request.form['email']
         password = request.form['password']
         hashed_pw = generate_password_hash(password)
@@ -30,7 +31,7 @@ def signup():
         cursor = conn.cursor()
         try:
             cursor.execute(
-                'INSERT INTO users (email, password) VALUES (?, ?)',
+                "INSERT INTO users (user_id, email, password) VALUES (?, ?, ?)",
                 (email, hashed_pw)
             )
             conn.commit()
@@ -48,12 +49,12 @@ def signup():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
+        user_id = request.form['user_id']
         password = request.form['password']
 
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = ?', (email,))
+        cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
         user = cursor.fetchone()
         conn.close()
 
@@ -62,7 +63,7 @@ def login():
             flash('로그인에 성공했습니다!')
             return redirect(url_for('register_ko'))  
         else:
-            flash('이메일 또는 비밀번호가 올바르지 않습니다.')
+            flash('사용자 ID 또는 비밀번호가 올바르지 않습니다.')
             return redirect(url_for('auth_bp.login'))
     
     return render_template('ko/auth/login_ko.html')
