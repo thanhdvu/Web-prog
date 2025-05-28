@@ -3,21 +3,28 @@ import sqlite3
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+import uuid
+from datetime import datetime, timedelta
 
 auth_bp = Blueprint('auth_bp', __name__)
 
-DB_PATH = 'users.db'
-DB_PATH = 'instance/yonsei.db'
+USERS_DB_PATH = os.path.abspath('users.db')
+YONSEI_DB_PATH = os.path.abspath('instance/yonsei.db')
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-def get_db_connection():
-    db_path = os.path.join(os.path.dirname(__file__), 'users.db')
-    conn = sqlite3.connect(db_path)
+# DB user
+def get_users_db():
+    conn = sqlite3.connect(USERS_DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
+#DB found items
+def get_yonsei_db():
+    conn = sqlite3.connect(YONSEI_DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -32,7 +39,7 @@ def signup():
         try:
             cursor.execute(
                 "INSERT INTO users (user_id, email, password) VALUES (?, ?, ?)",
-                (email, hashed_pw)
+                (user_id, email, hashed_pw)
             )
             conn.commit()
         except sqlite3.IntegrityError:
@@ -52,7 +59,7 @@ def login():
         user_id = request.form['user_id']
         password = request.form['password']
 
-        conn = get_db_connection()
+        conn = get_users_db()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
         user = cursor.fetchone()
@@ -103,3 +110,54 @@ def register_item():
 
     flash("습득물이 성공적으로 등록되었습니다.")
     return redirect(url_for('index_ko'))
+
+@auth_bp.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        conn = get_users_db()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE email = ?', (email,))
+        user = cursor.fetchone()
+
+        if user:
+            reset_token = str(uuid.uuid4())
+            token_expiration = (datetime.now() + timedelta(hours=1)).isoformat()
+            cursor.execute("UPDATE users SET reset_token=?, token_expiration=? WHERE email=?", 
+                           (reset_token, token_expiration, email))
+            conn.commit()
+            conn.close()
+
+            reset_link = url_for('auth_bp.reset_password', token=reset_token, _external=True)
+            flash(f"📧 비밀번호 재설정 링크가 이메일로 전송되었습니다: {reset_link}")  
+            return redirect(url_for('auth_bp.login'))
+        else:
+            flash("해당 이메일을 찾을 수 없습니다.")  
+            return redirect(url_for('auth_bp.forgot_password'))
+
+    return render_template('ko/auth/forgot_password.html')
+
+@auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    conn = get_users_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE reset_token = ?", (token,))
+    user = cursor.fetchone()
+
+    if not user or datetime.fromisoformat(user['token_expiration']) < datetime.now():
+        conn.close()
+        flash("유효하지 않거나 만료된 토큰입니다.")  
+        return redirect(url_for('auth_bp.login'))
+
+    if request.method == 'POST':
+        new_password = request.form.get('new_password')
+        hashed_pw = generate_password_hash(new_password)
+        cursor.execute("UPDATE users SET password=?, reset_token=NULL, token_expiration=NULL WHERE reset_token=?",
+                       (hashed_pw, token))
+        conn.commit()
+        conn.close()
+        flash("비밀번호가 성공적으로 재설정되었습니다!")  
+        return redirect(url_for('auth_bp.login'))
+
+    conn.close()
+    return render_template('ko/auth/reset_password.html', token=token)

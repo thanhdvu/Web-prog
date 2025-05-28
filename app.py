@@ -19,7 +19,7 @@ CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
 
-db = sqlite3.connect('users.db')
+
 
 @app.route('/')
 def home():
@@ -81,12 +81,17 @@ def login_ko():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        user = db.users.find_one({'email': email, 'password': password})
-        if user:
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE email = ?', (email,))
+        user = cursor.fetchone()
+        conn.close()
+        if user and user[3] == password:  
             session['user'] = email  
             return redirect(url_for('register_ko'))
         else:
-            return '로그인실패'
+            flash('로그인 실패: 이메일 또는 비밀번호가 올바르지 않습니다.')
+            return redirect(url_for('login_ko'))
     return render_template('ko/auth/login_ko.html')
 
 @app.route('/logout')
