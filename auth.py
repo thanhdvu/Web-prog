@@ -56,18 +56,17 @@ def signup():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
+        email = request.form['email'].strip()
+        password = request.form['password'].strip()
 
         conn = get_users_db()
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE user_id = ?', (email,))
+        cursor.execute('SELECT * FROM users WHERE email = ?', (email,))
         user = cursor.fetchone()
         conn.close()
 
         if user and check_password_hash(user['password'], password):
             session['email'] = user['email']
-            flash('로그인에 성공했습니다!')
             return redirect(url_for('register_ko'))  
         else:
             flash('이메일 또는 비밀번호가 올바르지 않습니다.')
@@ -110,6 +109,13 @@ def register_item():
 
     flash("습득물이 성공적으로 등록되었습니다.")
     return redirect(url_for('index_ko'))
+
+@auth_bp.route('/ko/register')
+def register_ko():
+    if 'email' not in session:
+        return render_template('ko/register_ko.html', error_message="로그인 후에 등록 기능을 이용하실 수 있습니다.")
+    user_email = session['email']
+    return render_template('ko/register_ko.html')
 
 @auth_bp.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():

@@ -46,7 +46,7 @@ def index_ko():
     if 'user_id' in session:
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
-        cursor.execute('SELECT email FROM users WHERE id = ?', (session['user_id'],))
+        cursor.execute('SELECT email FROM users WHERE id = ?', (session['email'],))
         user = cursor.fetchone()
         conn.close()
 
@@ -61,19 +61,9 @@ def find_ko():
     return render_template('ko/find_ko.html')
 
 @app.route('/ko/register')
+@app.route('/ko/register')
 def register_ko():
-    user_email = None
-
-    if 'user_id' in session:
-        conn = sqlite3.connect('users.db')
-        cursor = conn.cursor()
-        cursor.execute('SELECT email FROM users WHERE id = ?', (session['user_id'],))
-        user = cursor.fetchone()
-        conn.close()
-
-        if user:
-            user_email = user[0]
-
+    user_email = session.get('email')  # Lấy email từ session
     return render_template('ko/register_ko.html', user_email=user_email)
 
 @app.route('/ko/login_ko', methods=['GET','POST'])
@@ -96,7 +86,7 @@ def login_ko():
 
 @app.route('/logout')
 def logout():
-    session.pop('user', None)
+    session.pop('email', None)
     return redirect(url_for('login_ko'))
 
 @app.route('/ko/signup')
