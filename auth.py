@@ -124,18 +124,18 @@ def forgot_password():
             reset_token = str(uuid.uuid4())
             token_expiration = (datetime.now() + timedelta(hours=1)).isoformat()
             cursor.execute("UPDATE users SET reset_token=?, token_expiration=? WHERE email=?", 
-                           (reset_token, token_expiration, email))
+                            (reset_token, token_expiration, email))
             conn.commit()
             conn.close()
 
             reset_link = url_for('auth_bp.reset_password', token=reset_token, _external=True)
-            flash(f"📧 비밀번호 재설정 링크가 이메일로 전송되었습니다: {reset_link}")  
-            return redirect(url_for('auth_bp.login'))
+    
+            return redirect(reset_link)
+
         else:
             flash("해당 이메일을 찾을 수 없습니다.")  
             return redirect(url_for('auth_bp.forgot_password'))
-
-    return render_template('ko/auth/forgot_password.html')
+    return render_template('ko/auth/forgot_password.html') 
 
 @auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):

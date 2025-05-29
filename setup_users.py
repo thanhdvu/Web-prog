@@ -1,9 +1,9 @@
 import sqlite3
 import os
 
-users_db_path = os.path.abspath('users.db') 
+USERS_DB_PATH = os.path.abspath('users.db') 
 
-conn = sqlite3.connect('users_db_path')
+conn = sqlite3.connect(USERS_DB_PATH)
 cursor = conn.cursor()
 
 cursor.execute("DROP TABLE IF EXISTS users")
