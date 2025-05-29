@@ -66,11 +66,11 @@ def login():
         conn.close()
 
         if user and check_password_hash(user['password'], password):
-            session['user_id'] = user['id']
+            session['email'] = user['email']
             flash('로그인에 성공했습니다!')
             return redirect(url_for('register_ko'))  
         else:
-            flash('사용자 ID 또는 비밀번호가 올바르지 않습니다.')
+            flash('이메일 또는 비밀번호가 올바르지 않습니다.')
             return redirect(url_for('auth_bp.login'))
     
     return render_template('ko/auth/login_ko.html')
