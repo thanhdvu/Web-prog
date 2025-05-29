@@ -56,12 +56,12 @@ def signup():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user_id = request.form['user_id']
+        email = request.form['email']
         password = request.form['password']
 
         conn = get_users_db()
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
+        cursor.execute('SELECT * FROM users WHERE user_id = ?', (email,))
         user = cursor.fetchone()
         conn.close()
 
